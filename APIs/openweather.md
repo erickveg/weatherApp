@@ -4,8 +4,6 @@ As academics we get free access to the [OpenWeather API](https://openweathermap.
 
 We get the benefits of the _Developer Plan_ for [current weather and forecasts](https://openweathermap.org/price#current) and the _Medium Plan_ for the [historical weather collection](https://openweathermap.org/price#history).
 
-We will need to build our own data in Databricks using the API.
-
 You have to fill out the request form to get access to the “Developer Plan” for Open Weather API for free as a student. If you don’t sign up, you get this error when trying to access it in your code:
 
 ```
