@@ -1,17 +1,31 @@
+---
+format:
+    html:
+      embed-resources: true
+editor: visual
+---
+
 # Challenge General Information
 
-You can read the details of the challenge at [challenge.md](challenge.md)
+## Streamlit App
 
-## Key Items
+1. Open the repo: https://github.com/erickveg/app_challenge_wi24
+2. Clone the repo
+3. Run `docker compose up` in your terminal
+4. Enjoy!
 
-- __Due Date:__ 4/11/2024
-- __Work Rules:__ You cannot work with others.  You can ask any question you want in our general channel. The teacher and TA are the only ones who can answer questions. If you leverage code from an internet connection, it should be referenced.
-- __Product:__ A streamlit app that runs within Docker and builds from your repo.
-- __Github Process:__ Each student will fork the challenge repository and create their app. They will submit a link to the app in Canvas.
-- __Canvas Process:__ Each student will upload a `.pdf` or `.html` file with your results as described in [challenge.md](challenge.md)
+![](app_screenshot.png)
+
+## Value of DataBricks
+
+DataBricks provided the computing power needed to perform calculations with big data which wasn't available on my local computer. DataBricks made it easier to collaborate and share Data Science project since is a cloud-based platform. Using DataBrick was pretty convenient since all the basic Python libraries were are installed. The feature that I loved the most about DataBricks was the ability to create simple databases with multiple tables and they were accessible for everyone from any project!
+
+## PySpark vs Pandas
+
+PySpark is a library for data analysis designed to procces big data incredibly fast, while Pandas works great but most of the times with small datasets. PySpark has pretty convenient functions that avoid bulky code, a good example of that is the `window` function which can slice, group by, and aggregate in a couple of lines of code while Pandas sometimes performs one action at the time, duplicating the work done by the computer. One of the main disadvantages of PySpark is that most plotting libraries don't support PySpark dataframes, so they have to be converted to Pandas dataframes first.
+
+Pandas, in the other hand, is easier to read and faster to learn for beginners. It makes actions like filter, rename, and apply custom functions way easier than PySpark because of it's friendlier syntax.
 
 
-## Notes & References
-
-- [Fork a repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo)
-- [Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+## What is Docker
+Docker is a platform that helps programmers share a piece of software (an application) gathering all the external pieces (requirements) that makes the application work and puts into a single package which is call a container. This containers can be shared or uploaded to a provider that can make the application available throught the internet.
