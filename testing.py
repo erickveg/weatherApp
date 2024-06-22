@@ -27,10 +27,8 @@ months = {
     }
 
 ## USER INPUTS
-api_key = '' # this is selected by the user
+api_key = '578e5004deb4e325a35941d84fddee55' # this is selected by the user
 city = 'BYU Idaho' # this is selected by the user
-# TODO: Check when month is 5 - 10, requested data is out of allowed range
-# month_end = 10 # this is selected by the user
 user_temp = 45 # this is selected by the user
 
 
@@ -38,36 +36,6 @@ month_user= "October 2023"
 year = months[month_user]["year"]
 month = months[month_user]["month"]
 _, last_day = calendar.monthrange(year, month)
-
-
-
-
-
-# month_start = (month_end - 6) if (month_end - 6) > 0 else 12 + (month_end - 6)
-# current_month = datetime.datetime.now().month
-# current_year = datetime.datetime.now().year
-# year_start = 0
-# year_end = 0
-# last_day = 0
-# api_url = ""
-# lat = ""
-# lon = ""
-
-# if 1 <= month_end <= current_month:
-#     year_end= current_year 
-# else:
-#     year_end = current_year - 1
-
-# if month_end >= month_start:
-#     year_start = year_end
-# else:
-#     year_start = year_end - 1
-
-# if month_end == current_month:
-#     last_day = datetime.datetime.now().day - 1
-# else:
-#     _, last_day = calendar.monthrange(year_end, month_end)
-
 
 all_cities = {}
 

@@ -6,22 +6,24 @@ import pandas as pd
 import streamlit as st
 from annotated_text import annotated_text
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 import calendar
 import datetime
 from requests import request
 import altair as alt
 
 """
-# Weather App!
+# Weather Analyzer for all BYU Campus!
 
 """
 annotated_text(("Erick Vega", "author"))
 
 st.header("Instructions")
-st.write("1. Enter your OpenWeatherMap API key in the sidebar.")
-st.write("2. Select a month from the dropdown.")
-st.write("3. Use the slider to select a temperature. (This will be used to determine the number of hours the temperature was above the user input value.)")
-st.write("4. Click the 'Submit' button to generate the weather data for all BYU locations.")
+st.write("This app allows you to analyze historical weather data (last 6 months) for all three BYU campuses.")
+st.write("All the data has been taken from the OpenWeatherMap API, https://openweathermap.org/history")
+st.write("1. Select a month from the dropdown to the left.")
+st.write("2. Use the slider to select a temperature. (This will be used to determine the number of hours the temperature on certain location was above YOUR temperature)")
+st.write("3. Click the 'Submit' button to generate the results.")
 
 st.header("Results")
 
@@ -31,14 +33,23 @@ byu_locations = {"BYU Idaho": {"lat": 43.825386, "lon": -111.792824},
                  "BYU Hawaii": {"lat": 21.648287, "lon": -157.922562}
                  }
 
-months = {
-    "October 2023": {"month": 10, "year": 2023},
-    "November 2023": {"month": 11, "year": 2023},
-    "December 2023": {"month": 12, "year": 2023},
-    "January 2024" : {"month": 1, "year": 2024},
-    "February 2024" : {"month": 2, "year": 2024},
-    "March 2024" : {"month": 3, "year": 2024},
-    }
+# Current date
+now = datetime.datetime.now()
+
+# Dictionary to hold the months
+months = {}
+
+# Generate the last 6 months, not including the current month
+for i in range(1, 7):
+    # Calculate the month
+    month_date = now - relativedelta(months=i)
+    # Format the month name and year
+    month_name = month_date.strftime("%B %Y")
+    # Add to the dictionary
+    months[month_name] = {"month": month_date.month, "year": month_date.year}
+
+# Reverse the dictionary to have it in chronological order
+months = dict(reversed(list(months.items())))
 
 def reset_submit_clicked():
     if 'submit_clicked' not in st.session_state:
@@ -51,7 +62,8 @@ def reset_submit_clicked():
     st.session_state['all_cities'] = False
 
 ## USER INPUTS
-api_key = st.sidebar.text_input("API Key:")
+# api_key = st.sidebar.text_input("API Key:")
+api_key = '578e5004deb4e325a35941d84fddee55'
 month_user = st.sidebar.selectbox("Month:", list(months.keys()), index=0, on_change=reset_submit_clicked)
 user_temp = st.sidebar.slider("User Temp:", 0, 100, 45)
 
@@ -246,19 +258,17 @@ if st.sidebar.button('Submit') or st.session_state['submit_clicked']:
 
     # DISPLAY MONTHLY SUMMARY 
     st.header("Weather Summary for all BYU Locations")
-    st.write("The following table displays historical weather data for all three cities that includes:")      
-    st.write("- The average daily high temperature for the month.")
-    st.write("- The average daily low temperature for the month.")
+    st.write("The following table displays historical weather data for all three BYU location and includes:")  
+    st.write("- The monthly average daily low temperature")    
+    st.write("- The monthly average daily high temperature")    
+    st.write("- The number of hours in the month the temperature was above a user temperature value.")
     st.write("- The number of observations at each location.")
-    st.write("- The number of hours in the month the temperature is above a user input value.")
     st.table(df_monthly.rename(columns={
         "avg_low_temp": "Avg. Low Temp",
         "avg_high_temp": "Avg. High Temp",
         "num_hours_above_user_temp": "Hours Above User Temp",
         "observations_num": "Observations"
         }).drop(["month"], axis=1))
-
-
 
     # DISPLAY DAILY HIGHS 
     st.header("Daily Highs for all BYU Locations")
